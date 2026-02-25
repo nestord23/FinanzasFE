@@ -1,0 +1,237 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform var(--transition-slow);
+}
+
+.sidebar--open {
+  transform: translateX(0);
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar__logo {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.sidebar__nav {
+  flex: 1;
+  padding: var(--spacing-md);
+  overflow-y: auto;
+}
+
+.sidebar__section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.sidebar__section-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text-secondary);
+  border-radius: var(--border-radius);
+  transition: all var(--transition);
+}
+
+.sidebar__link:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.sidebar__link--active {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.sidebar__link-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar__footer {
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.main-wrapper {
+  flex: 1;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (min-width: 1024px) {
+  .main-wrapper {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  height: var(--header-height);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
+  z-index: 50;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.header__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+}
+
+.header__menu-btn:hover {
+  background-color: var(--color-surface-hover);
+}
+
+@media (min-width: 1024px) {
+  .header__menu-btn {
+    display: none;
+  }
+}
+
+.header__title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.header__user:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.header__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.header__user-name {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: var(--spacing-xl);
+  }
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page__header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.page__title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.page__subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+.footer {
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.footer__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

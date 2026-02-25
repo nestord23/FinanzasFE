@@ -1,0 +1,121 @@
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stats-card {
+  padding: var(--spacing-lg);
+}
+
+.stats-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.stats-card__title {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stats-card__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+}
+
+.stats-card__value {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stats-card__change {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.stats-card__change--positive {
+  color: var(--color-success);
+}
+
+.stats-card__change--negative {
+  color: var(--color-danger);
+}
+
+.stats-card--primary .stats-card__value {
+  color: var(--color-primary);
+}
+
+.stats-card--success .stats-card__value {
+  color: var(--color-success);
+}
+
+.stats-card--danger .stats-card__value {
+  color: var(--color-danger);
+}
+
+.stats-card--warning .stats-card__value {
+  color: var(--color-warning);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.section__title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.section__actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}

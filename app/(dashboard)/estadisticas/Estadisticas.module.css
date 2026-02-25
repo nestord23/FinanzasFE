@@ -1,0 +1,123 @@
+.chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 250px;
+  padding: var(--spacing-lg) 0;
+}
+
+.chartBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+}
+
+.barContainer {
+  display: flex;
+  align-items: flex-end;
+  height: 200px;
+  width: 100%;
+  justify-content: center;
+}
+
+.bar {
+  width: 40px;
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+  position: relative;
+  transition: height var(--transition-slow);
+}
+
+.bar:hover {
+  opacity: 0.9;
+}
+
+.barValue {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.barLabel {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.statsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.operacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.operacion:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.operacionLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.operacionValuePositiva {
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.operacionValueNegativa {
+  font-weight: 600;
+  color: var(--color-danger);
+}
+
+.rendimiento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.rendimientoItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.rendimientoBar {
+  height: 8px;
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.rendimientoFillPositivo {
+  height: 100%;
+  background-color: var(--color-success);
+  border-radius: var(--border-radius-full);
+  transition: width var(--transition-slow);
+}
+
+.rendimientoFillNegativo {
+  height: 100%;
+  background-color: var(--color-danger);
+  border-radius: var(--border-radius-full);
+  transition: width var(--transition-slow);
+}
+
+.rendimientoLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
