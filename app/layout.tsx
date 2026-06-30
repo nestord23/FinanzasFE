@@ -5,6 +5,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'BolsaSim - Simulación de Bolsa',
   description: 'Plataforma de simulación de bolsa en tiempo real',
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body>
         <AuthProvider>
           {children}
