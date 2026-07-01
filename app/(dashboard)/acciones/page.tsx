@@ -1,63 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Card, { CardHeader, CardContent } from '@/components/common/Card';
 import Button from '@/components/common/Button';
-import { getAcciones, Accion } from '@/lib/api';
+import { Accion } from '@/lib/api';
+import { useSSEContext } from '@/hooks/SSEContext';
 import styles from './Acciones.module.css';
 
 export default function AccionesPage() {
-  const [acciones, setAcciones] = useState<Accion[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [connected, setConnected] = useState(false);
+  const { connected, precios } = useSSEContext();
 
-  useEffect(() => {
-    const fetchAcciones = async () => {
-      try {
-        const data = await getAcciones();
-        setAcciones(data);
-        setConnected(true);
-      } catch (err) {
-        setError('Error al cargar las acciones');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAcciones();
-
-    const interval = setInterval(fetchAcciones, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const acciones = precios;
 
   const handleComprar = (accion: Accion) => {
     console.log('Comprar:', accion);
   };
-
-  if (loading) {
-    return (
-      <div className="page">
-        <div className="page__header">
-          <h1 className="page__title">Mercado de Acciones</h1>
-        </div>
-        <p>Cargando acciones...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="page">
-        <div className="page__header">
-          <h1 className="page__title">Mercado de Acciones</h1>
-        </div>
-        <p style={{ color: 'red' }}>{error}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="page">
@@ -66,7 +22,7 @@ export default function AccionesPage() {
         <p className="page__subtitle">Explora las acciones disponibles para operar</p>
         <div className={styles.connectionStatus}>
           <span className={`${styles.indicator} ${connected ? styles.connected : ''}`} />
-          {connected ? 'Actualizado' : 'Cargando...'}
+          {connected || precios.length > 0 ? 'Actualizado' : 'Cargando...'}
         </div>
       </div>
 

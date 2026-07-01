@@ -83,6 +83,26 @@
   color: var(--color-danger);
 }
 
+.connectionStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-danger);
+  display: inline-block;
+}
+
+.indicator.connected {
+  background-color: var(--color-success);
+}
+
 .volumenCell {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);

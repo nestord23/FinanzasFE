@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Usuario } from '@/lib/supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -16,23 +16,29 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-function getInitialAuth() {
-  if (typeof window === 'undefined') {
-    return { session: null, user: null };
-  }
-  const storedSession = localStorage.getItem('session');
-  const storedUser = localStorage.getItem('user');
-  return {
-    session: storedSession,
-    user: storedUser ? JSON.parse(storedUser) : null,
-  };
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const initialAuth = useMemo(() => getInitialAuth(), []);
-  const [user, setUser] = useState<Usuario | null>(initialAuth.user);
-  const [session, setSession] = useState<string | null>(initialAuth.session);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<Usuario | null>(null);
+  const [session, setSession] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/mi-perfil`, {
+          credentials: 'include',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data);
+          setSession('authenticated');
+        }
+      } catch {
+        // no autenticado
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -40,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
 
       const data = await response.json();
@@ -48,14 +55,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { error: data.error || 'Error al iniciar sesión' };
       }
 
-      const token = data.session.access_token;
-      const userData = data.user;
-
-      localStorage.setItem('session', token);
-      localStorage.setItem('user', JSON.stringify(userData));
-
-      setSession(token);
-      setUser(userData);
+      setUser(data.user);
+      setSession('authenticated');
 
       return { error: null };
     } catch {
@@ -84,8 +85,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
-    localStorage.removeItem('session');
-    localStorage.removeItem('user');
+    try {
+      await fetch(`${API_URL}/api/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch {
+      // ignorar error de logout
+    }
     setSession(null);
     setUser(null);
   };

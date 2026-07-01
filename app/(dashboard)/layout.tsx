@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
 import AuthGuard from '@/components/auth/AuthGuard';
+import { SSEProvider } from '@/hooks/SSEContext';
 import styles from './layout.module.css';
 
 const pageTitles: Record<string, string> = {
@@ -26,13 +27,15 @@ export default function DashboardLayout({
 
   return (
     <AuthGuard>
-      <div className={styles.layout}>
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <div className={styles.mainWrapper}>
-          <Header title={currentTitle} onMenuClick={() => setSidebarOpen(true)} />
-          <main className={styles.mainContent}>{children}</main>
+      <SSEProvider>
+        <div className={styles.layout}>
+          <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+          <div className={styles.mainWrapper}>
+            <Header title={currentTitle} onMenuClick={() => setSidebarOpen(true)} />
+            <main className={styles.mainContent}>{children}</main>
+          </div>
         </div>
-      </div>
+      </SSEProvider>
     </AuthGuard>
   );
 }
